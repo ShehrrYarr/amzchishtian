@@ -1,0 +1,40 @@
+# Laravel & PHP
+/vendor
+/node_modules
+/public/storage
+/storage/*.key
+.env
+.phpunit.result.cache
+
+# Laravel storage (ignore all except .gitignore files)
+storage/app/*
+!storage/app/.gitignore
+storage/framework/*
+!storage/framework/.gitignore
+storage/logs/*
+!storage/logs/.gitignore
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+.idea
+.vscode
+*.sublime-workspace
+*.sublime-project
+
+# Composer
+composer.phar
+
+# NPM
+npm-debug.log
+yarn-error.log
+
+# Laravel Mix
+/public/hot
+/public/mix-manifest.json
+/public/css/*.map
+/public/js/*.map
+
+# Others
+*.log
+/public/invoices/
