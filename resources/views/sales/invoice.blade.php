@@ -131,7 +131,7 @@
 <body>
     <div class="receipt">
         <div class="center shop-logo bold">AMZ Mobiles</div>
-        <div class="center main-label">Chishtian Branch</div>
+        <div class="center main-label">Chistian Branch</div>
         <div class="center" style="font-size:12px; margin-bottom: 2px;">
             <span class="bold">Ph: 0322-3190100, 0307-4931450</span>
         </div>
@@ -209,7 +209,7 @@
         </div>
         <div class="divider"></div>
         <div class="center bold" style="font-size:13px;">
-            <span style="font-size:10px;">Address: Milad Chowk Near Dr.zubair Hospital</span><br>
+            <span style="font-size:10px;">Address: Milad Chowk Near Dr.zubair Hospital Chistian</span><br>
             Thank you for shopping!
         </div>
         <div class="no-print center" style="margin-top:10px;">
