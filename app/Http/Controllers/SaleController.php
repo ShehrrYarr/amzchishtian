@@ -169,18 +169,29 @@ public function checkout(Request $request)
         'cart_discount'    => 'nullable|numeric|min:0',
     ]);
 
+    // if (!$data['vendor_id']) {
+    //     if (empty($data['customer_name'])) {
+    //         return response()->json(['success' => false, 'message' => 'Enter customer name for walk-in.']);
+    //     }
+    //     if (empty($data['customer_mobile'])) {
+    //         return response()->json(['success' => false, 'message' => 'Enter mobile number for walk-in customer.']);
+    //     }
+    //     CustomerInfo::firstOrCreate(
+    //         ['mobile' => $data['customer_mobile']],
+    //         ['name' => $data['customer_name']]
+    //     );
+    // }
     if (!$data['vendor_id']) {
-        if (empty($data['customer_name'])) {
-            return response()->json(['success' => false, 'message' => 'Enter customer name for walk-in.']);
-        }
-        if (empty($data['customer_mobile'])) {
-            return response()->json(['success' => false, 'message' => 'Enter mobile number for walk-in customer.']);
-        }
-        CustomerInfo::firstOrCreate(
-            ['mobile' => $data['customer_mobile']],
-            ['name' => $data['customer_name']]
-        );
+    if (empty($data['customer_name'])) {
+        return response()->json(['success' => false, 'message' => 'Enter customer name for walk-in.']);
     }
+    // If no customer_mobile, use default '00000000'
+    $customerMobile = empty($data['customer_mobile']) ? '00000000' : $data['customer_mobile'];
+    CustomerInfo::firstOrCreate(
+        ['mobile' => $customerMobile],
+        ['name' => $data['customer_name']]
+    );
+}
 
     DB::beginTransaction();
     try {
