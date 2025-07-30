@@ -83,6 +83,29 @@ public function edit($id)
  }
 }
 
+public function filter(Request $request)
+{
+    $companies = Company::all();
+    $groups = Group::all();
+
+    // Build query with optional filters
+    $query = Accessory::with(['group', 'company', 'user', 'batches']);
+
+    // Filter by group_id if present
+    if ($request->filled('group_id')) {
+        $query->where('group_id', $request->input('group_id'));
+    }
+
+    // Filter by company_id if present
+    if ($request->filled('company_id')) {
+        $query->where('company_id', $request->input('company_id'));
+    }
+
+    $accessories = $query->get();
+
+    return view('accessories.filter', compact('accessories', 'companies', 'groups'));
+}
+
 
 
 }

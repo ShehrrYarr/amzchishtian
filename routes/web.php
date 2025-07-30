@@ -129,6 +129,8 @@ Route::get('/accessories', [AccessoryController::class, 'index'])->name('accesso
 Route::post('/accessories', [AccessoryController::class, 'store'])->name('accessories.store');
 Route::get('/accessoryedit/{id}', [AccessoryController::class, 'edit'])->name('accessories.edit');
 Route::put('/accessories', [AccessoryController::class, 'update'])->name('accessories.update');
+Route::get('/filteraccessory',[AccessoryController::class,'filter'])->name('filter.index');
+
 
 //Batch Routes
 Route::get('/batches', [AccessoryBatchController::class, 'index'])->name('batches.index');

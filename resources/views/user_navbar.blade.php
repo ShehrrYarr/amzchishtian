@@ -167,17 +167,21 @@
                                                 <li class="@if (\Request::is('pos')) active @endif"><a class="menu-item"
                                                                 href="/pos" data-i18n="1 columns">POS</a>
                                                 </li>
-                                                <li class="@if (\Request::is('sales/pending')) active @endif"><a class="menu-item"
-                                                                href="/sales/pending" data-i18n="1 columns">Pending Sales</a>
+                                                <li class="@if (\Request::is('sales/pending')) active @endif"><a
+                                                                class="menu-item" href="/sales/pending"
+                                                                data-i18n="1 columns">Pending Sales</a>
                                                 </li>
-                                                <li class="@if (\Request::is('sales/approved')) active @endif"><a class="menu-item"
-                                                                href="/sales/approved" data-i18n="1 columns">Approved Sales</a>
+                                                <li class="@if (\Request::is('sales/approved')) active @endif"><a
+                                                                class="menu-item" href="/sales/approved"
+                                                                data-i18n="1 columns">Approved Sales</a>
                                                 </li>
-                                                <li class="@if (\Request::is('sales/all')) active @endif"><a class="menu-item"
-                                                                href="/sales/all" data-i18n="1 columns">All Sales</a>
+                                                <li class="@if (\Request::is('sales/all')) active @endif"><a
+                                                                class="menu-item" href="/sales/all"
+                                                                data-i18n="1 columns">All Sales</a>
                                                 </li>
-                                                <li class="@if (\Request::is('sales/refunds')) active @endif"><a class="menu-item"
-                                                                href="/sales/refunds" data-i18n="1 columns">Refund</a>
+                                                <li class="@if (\Request::is('sales/refunds')) active @endif"><a
+                                                                class="menu-item" href="/sales/refunds"
+                                                                data-i18n="1 columns">Refund</a>
                                                 </li>
 
                                         </ul>
@@ -186,6 +190,11 @@
                                                         class="menu-title" data-i18n="Templates">Accessory
                                                         Inventory</span></a>
                                         <ul class="menu-content">
+
+                                                <li class="@if (\Request::is('filteraccessory')) active @endif"><a
+                                                                class="menu-item" href="/filteraccessory"
+                                                                data-i18n="1 columns">Search Filter</a>
+                                                </li>
                                                 <li class="@if (\Request::is('accessories')) active @endif"><a
                                                                 class="menu-item" href="/accessories"
                                                                 data-i18n="1 columns">Add Accessory</a>
@@ -243,8 +252,7 @@
                                                         <a class="menu-item" href="/send-message-to-customers"
                                                                 data-i18n="1 columns">Send Message</a>
                                                 </li>
-                                                <li
-                                                        class="@if (\Request::is('loginhistory')) active @endif">
+                                                <li class="@if (\Request::is('loginhistory')) active @endif">
                                                         <a class="menu-item" href="/loginhistory"
                                                                 data-i18n="1 columns">Login Histories</a>
                                                 </li>
