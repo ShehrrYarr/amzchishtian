@@ -130,11 +130,10 @@
 
 <body>
     <div class="receipt">
-        <div class="center shop-logo bold">AMZ</div>
-        <div class="center shop-logo bold">Shahzad Mobiles</div>
-        <div class="center main-label">Hasilpur Branch</div>
+        <div class="center shop-logo bold">AMZ Mobiles</div>
+        <div class="center main-label">Chishtian Branch</div>
         <div class="center" style="font-size:12px; margin-bottom: 2px;">
-            <span class="bold">Ph: 0322-3190100, 0301-7662525</span>
+            <span class="bold">Ph: 0322-3190100, 0307-4931450</span>
         </div>
         <div class="divider"></div>
         <table>
