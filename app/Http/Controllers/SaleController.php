@@ -181,15 +181,15 @@ public function checkout(Request $request)
     //         ['name' => $data['customer_name']]
     //     );
     // }
-    if (!$data['vendor_id']) {
-    if (empty($data['customer_name'])) {
-        return response()->json(['success' => false, 'message' => 'Enter customer name for walk-in.']);
-    }
-    // If no customer_mobile, use default '00000000'
+   if (!$data['vendor_id']) {
+    // Set default customer name if empty
+    $customerName = empty($data['customer_name']) ? 'Walk In Customer' : $data['customer_name'];
+    // Set default customer mobile if empty
     $customerMobile = empty($data['customer_mobile']) ? '00000000' : $data['customer_mobile'];
+    
     CustomerInfo::firstOrCreate(
         ['mobile' => $customerMobile],
-        ['name' => $data['customer_name']]
+        ['name' => $customerName]
     );
 }
 
@@ -197,7 +197,7 @@ public function checkout(Request $request)
     try {
         $sale = Sale::create([
             'vendor_id'       => $data['vendor_id'],
-            'customer_name'   => $data['customer_name'],
+            'customer_name'   => $customerName,
             'customer_mobile' => $data['customer_mobile'] ?? null,
             'sale_date'       => now(),
             'total_amount'    => 0,
