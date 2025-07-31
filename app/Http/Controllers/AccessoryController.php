@@ -60,7 +60,7 @@ public function edit($id)
 
     }
 
-    public function update(Request $request)
+       public function update(Request $request)
 {
     $password = $request->input('password');
         $masterPassword = MasterPassword::first();
@@ -70,13 +70,14 @@ public function edit($id)
     $validated = $request->validate([
         'name' => 'required|string|max:255',
         'description' => 'nullable|string',
+        'min_qty' => 'nullable|string',
         'group_id' => 'required|exists:groups,id',
         'company_id' => 'required|exists:companies,id',
     ]);
 
     $accessory->update($validated);
 
-    return redirect()->back()->with('success', 'Accessory Created Successfully.');
+    return redirect()->back()->with('success', 'Accessory Updated Successfully.');
  }
  else {
     return redirect()->back()->with('danger', 'Incorrect update password.');

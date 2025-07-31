@@ -110,6 +110,11 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="mb-1">
+                            <label for="min_qty" class="form-label">Minimum Quantity</label>
+                            <input id="min_qty" class="form-control" name="min_qty" placeholder="Enter Minumum Quantity"
+                                required>
+                        </div>
 
 
                         <div class="mb-1">
@@ -236,8 +241,9 @@ function edit(value) {
         $('#company_id').val(data.result.company_id);
         $('#group_id').val(data.result.group_id);
         $('#description').val(data.result.description);
+        $('#min_qty').val(data.result.min_qty);
         
-        
+       
         
         },
         error: function (error) {
