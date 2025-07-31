@@ -186,6 +186,20 @@
                 {{ session('danger') }}
             </div>
             @endif
+            <div class="ml-1">
+                <form method="GET" action="{{ route('batches.index') }}" class="mb-3 d-flex align-items-center">
+                    <input type="date" class="form-control mr-2" name="start_date" value="{{ request('start_date') }}"
+                        style="max-width: 180px;">
+                    <span class="mx-1">to</span>
+                    <input type="date" class="form-control mr-2" name="end_date" value="{{ request('end_date') }}"
+                        style="max-width: 180px;">
+                    <button type="submit" class="btn btn-primary mx-1">Filter</button>
+                    <a href="{{ route('batches.index') }}" class="btn btn-secondary mx-1">Reset</a>
+                </form>
+            </div>
+            <div class="ml-1">
+                <h2>Total Purchase Amount: {{$totalPurchasePrice}}</h2>
+            </div>
 
             <button type="button" class="btn btn-primary ml-1" data-toggle="modal" data-target="#exampleModal">
                 <i class="bi bi-plus"></i> Add Batch

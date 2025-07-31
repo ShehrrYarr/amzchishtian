@@ -21,16 +21,28 @@ class AccessoryBatchController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
-    {
-       
-        $vendors = vendor::all();
-        $accessories = Accessory::all();
+  public function index(Request $request)
+{
+    $vendors = Vendor::all();
+    $accessories = Accessory::all();
 
-        
-        $batches = AccessoryBatch::with(['accessory','user','vendor'])->get();
-        return view('batches.index', compact('batches','vendors','accessories'));
+    $query = AccessoryBatch::with(['accessory', 'user', 'vendor']);
+
+    if ($request->filled('start_date') && $request->filled('end_date')) {
+        $start = $request->input('start_date') . ' 00:00:00';
+        $end = $request->input('end_date') . ' 23:59:59';
+        $query->whereBetween('created_at', [$start, $end]);
     }
+
+    $batches = $query->orderByDesc('id')->get();
+
+    // Sum of total purchase price (filtered!)
+    $totalPurchasePrice = $batches->sum(function($batch) {
+        return $batch->qty_purchased * $batch->purchase_price;
+    });
+
+    return view('batches.index', compact('batches', 'vendors', 'accessories', 'totalPurchasePrice'));
+}
 
     // public function store(Request $request)
     // {
