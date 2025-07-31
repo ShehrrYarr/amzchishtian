@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- Modal for Sale Items and Return Form -->
-<div class="modal fade"  id="saleItemsModal" tabindex="-1" aria-labelledby="saleItemsModalLabel" aria-hidden="true">
+<div class="modal fade" id="saleItemsModal" tabindex="-1" aria-labelledby="saleItemsModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form method="POST" action="" id="return-items-form">
             <div class="modal-content">
@@ -16,14 +16,14 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Submit Return</button>
-                   <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">
+                    <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">
                         <i class="feather icon-x"></i> Close
                     </button>
                 </div>
             </div>
         </form>
     </div>
-</div>  
+</div>
 
 <div class="app-content content">
     <div class="content-overlay"></div>
@@ -43,19 +43,20 @@
             </div>
             @endif
 
-            <div class="row mb-2">
-                <div class="col-md-3">
-                    <input type="date" class="form-control" id="start_date" name="start_date" value="{{ request('start_date') }}">
-                </div>
-                <div class="col-md-3">
-                    <input type="date" class="form-control" id="end_date" name="end_date" value="{{ request('end_date') }}">
-                </div>
-                <div class="col-md-3">
-                    <button class="btn btn-primary" id="filterBtn" type="button">Filter</button>
-                    <button class="btn btn-secondary" id="resetBtn" type="button">Reset</button>
-                </div>
+            <div class="ml-1">
+                <form method="GET" action="{{ route('sales.all') }}" class="mb-3 d-flex align-items-center">
+                    <input type="date" class="form-control mr-2" name="start_date" value="{{ request('start_date') }}"
+                        style="max-width: 180px;">
+                    <span class="mx-1">to</span>
+                    <input type="date" class="form-control mr-2" name="end_date" value="{{ request('end_date') }}"
+                        style="max-width: 180px;">
+                    <button type="submit" class="btn btn-primary mx-1">Filter</button>
+                    <a href="{{ route('sales.all') }}" class="btn btn-secondary mx-1">Reset</a>
+                </form>
             </div>
-
+            <div class="ml-1">
+                <h2>Total Selling Amount: {{$totalSalesAmount}}</h2>
+            </div>
 
 
             <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-12 latest-update-tracking mt-1 ">
@@ -63,22 +64,22 @@
                     <div class="card-header latest-update-heading d-flex justify-content-between">
                         <h4 class="latest-update-heading-title text-bold-500">All Sales</h4>
 
+
                     </div>
                     <div class="table-responsive">
                         <table id="loginTable" class="table table-striped table-bordered zero-configuration">
                             <thead>
                                 <tr>
-                                   <th>Sale #</th>
+                                    <th>Sale #</th>
                                     <th>Date</th>
                                     <th>Customer/Vendor</th>
                                     <th>Total</th>
-                                    <th>Items</th> 
-                                        <th>Status</th>
+                                    <th>Items</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
-                           <tbody id="sales-table-body">
-                            @include('sales.partials.table', ['sales' => $sales])
-                                {{-- @foreach($sales as $sale)
+                            <tbody id="sales-table-body">
+                                @foreach($sales as $sale)
                                 <tr>
                                     <td>{{ $sale->id }}</td>
                                     <td>{{ \Carbon\Carbon::parse($sale->sale_date)->format('d M Y, H:i') }}</td>
@@ -93,13 +94,16 @@
                                     </td>
                                     <td><strong>Rs. {{ number_format($sale->total_amount,2) }}</strong></td>
                                     <td>
-                                        <a href="javascript:void(0)" class="sale-items-link" data-sale="{{ $sale->id }}">
-                                            @foreach($sale->items as $item)
-                                            <li>
-                                                {{ $item->batch->accessory->name ?? '-' }} x{{ $item->quantity }}
-                                                ({{ number_format($item->price_per_unit,2) }} each)
-                                            </li>
-                                            @endforeach
+                                        <a href="javascript:void(0)" class="sale-items-link"
+                                            data-sale="{{ $sale->id }}">
+                                            <ul style="list-style:none; margin:0; padding:0;">
+                                                @foreach($sale->items as $item)
+                                                <li>
+                                                    {{ $item->batch->accessory->name ?? '-' }} x{{ $item->quantity }}
+                                                    ({{ number_format($item->price_per_unit,2) }} each)
+                                                </li>
+                                                @endforeach
+                                            </ul>
                                         </a>
                                     </td>
                                     <td>
@@ -110,8 +114,9 @@
                                         @endif
                                     </td>
                                 </tr>
-                                @endforeach       --}}
-                                      </tbody>
+                                @endforeach
+
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -123,40 +128,6 @@
 </div>
 
 <script>
-
-    $(document).ready(function() {
-    $('#filterBtn').on('click', function() {
-    var start = $('#start_date').val();
-    var end = $('#end_date').val();
-    
-    $.ajax({
-    url: '{{ route("sales.all") }}',
-    type: 'GET',
-    data: {start_date: start, end_date: end},
-    success: function(data) {
-    // Extract only the table body from the response
-    var html = $('<div>').html(data);
-        var newTbody = html.find('#sales-table-body').html();
-        $('#sales-table-body').html(newTbody ? newTbody : data); // fallback
-        }
-        });
-        });
-    
-        $('#resetBtn').on('click', function() {
-        $('#start_date').val('');
-        $('#end_date').val('');
-    
-        $.ajax({
-        url: '{{ route("sales.all") }}',
-        type: 'GET',
-        success: function(data) {
-        var html = $('<div>').html(data);
-            var newTbody = html.find('#sales-table-body').html();
-            $('#sales-table-body').html(newTbody ? newTbody : data);
-            }
-            });
-            });
-            });
     // document.addEventListener('DOMContentLoaded', function() {
     //     // When the "View Items" link is clicked
     //     document.querySelectorAll('.sale-items-link').forEach(function(link) {
@@ -284,7 +255,7 @@
     });
 });
 
-    </script>
+</script>
 
 
 @endsection

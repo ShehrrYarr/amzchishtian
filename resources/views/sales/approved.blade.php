@@ -20,7 +20,9 @@
             @endif
 
 
-
+            <div class="ml-1">
+                <h2>Total Selling Amount: {{$totalSalesAmount}}</h2>
+            </div>
             <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-12 latest-update-tracking mt-1 ">
                 <div class="card ">
                     <div class="card-header latest-update-heading d-flex justify-content-between">

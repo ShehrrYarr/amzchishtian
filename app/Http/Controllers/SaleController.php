@@ -552,8 +552,10 @@ public function approved(Request $request)
     }
 
     $sales = $query->orderBy('approved_at', 'desc')->get();
+   $totalSalesAmount = $sales->sum('total_amount');
 
-    return view('sales.approved', compact('sales'));
+
+    return view('sales.approved', compact('sales','totalSalesAmount'));
 }
 
 
@@ -566,10 +568,13 @@ public function approved(Request $request)
 
 public function allSales(Request $request)
 {
-    // Start a query so you can add filters
-    $query = \App\Models\Sale::with(['vendor', 'items.batch.accessory', 'user']);
+    
 
-    // Apply date filter if provided
+
+      $query = \App\Models\Sale::with(['vendor', 'items.batch.accessory', 'user']);
+
+
+    // Filter by date range if provided
     if ($request->filled('start_date') && $request->filled('end_date')) {
         $start = $request->input('start_date') . ' 00:00:00';
         $end = $request->input('end_date') . ' 23:59:59';
@@ -577,9 +582,10 @@ public function allSales(Request $request)
     }
 
     $sales = $query->orderByDesc('id')->get();
+   $totalSalesAmount = $sales->sum('total_amount');
 
     // We’ll handle AJAX in later steps
-    return view('sales.all', compact('sales'));
+    return view('sales.all', compact('sales','totalSalesAmount'));
 }
 
 
