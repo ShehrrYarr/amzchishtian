@@ -207,6 +207,7 @@
 
                                         </ul>
                                 </li>
+
                                 <li class=" nav-item"><a href="#"><i class="feather icon-tv"></i><span
                                                         class="menu-title" data-i18n="Templates">Add values</span></a>
                                         <ul class="menu-content">
@@ -219,6 +220,16 @@
                                                                 data-i18n="1 columns">Groups</a>
                                                 </li>
 
+                                        </ul>
+                                </li>
+                                <li class=" nav-item"><a href="#"><i class="feather icon-tv"></i><span class="menu-title" data-i18n="Templates">Manage
+                                                        Petty Cash</span></a>
+                                        <ul class="menu-content">
+                                                <li class="@if (\Request::is('petty-cash')) active @endif"><a class="menu-item" href="/petty-cash"
+                                                                data-i18n="1 columns">Petty Cash</a>
+                                                </li>
+                                
+                                
                                         </ul>
                                 </li>
                                 @php

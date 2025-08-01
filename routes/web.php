@@ -181,6 +181,9 @@ Route::get('/sales/refunds', [SaleController::class, 'refundsPage'])->name('sale
 
 // Route::post('/sales/{sale}/return', [SaleController::class, 'returnItems'])->name('sales.return');
 
+//Petty Cash Routes
+Route::get('/petty-cash', [PettyCashController::class, 'index'])->name('pettycash.index');
+Route::post('/petty-cash', [PettyCashController::class, 'store'])->name('pettycash.store');
 
 
 
