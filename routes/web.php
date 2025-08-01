@@ -12,6 +12,8 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\CustomerMessageController;
 use App\Http\Controllers\LoginHistoryController;
+use App\Http\Controllers\PettyCashController;
+
 
 
 use Illuminate\Support\Facades\Route;
