@@ -168,6 +168,8 @@ public function checkout(Request $request)
         'pay_amount'       => 'nullable|numeric|min:0',
         'cart_discount'    => 'nullable|numeric|min:0',
     ]);
+      $customerName   = $data['customer_name'] ?? null;
+    $customerMobile = $data['customer_mobile'] ?? null;
 
     // if (!$data['vendor_id']) {
     //     if (empty($data['customer_name'])) {
